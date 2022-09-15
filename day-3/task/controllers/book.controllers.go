@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"example.com/crud/models"
+	"example.com/middleware/models"
 	"github.com/labstack/echo/v4"
 )
 
@@ -24,7 +24,7 @@ func GetBookByIDController(c echo.Context) error {
 			return c.JSON(http.StatusOK, models.Response{http.StatusOK, "Success", b})
 		}
 	}
-	return c.JSON(http.StatusNotFound, models.Response{Code: http.StatusNotFound, Message: "Book not found"})
+	return echo.NewHTTPError(http.StatusNotFound, "Book not found")
 }
 
 func AddBookController(c echo.Context) error {
@@ -70,7 +70,7 @@ func UpdateBookController(c echo.Context) error {
 			return c.JSON(http.StatusOK, models.Response{http.StatusOK, "Success", b})
 		}
 	}
-	return c.JSON(http.StatusNotFound, models.Response{Code: http.StatusNotFound, Message: "Book not found"})
+	return echo.NewHTTPError(http.StatusNotFound, "Book not found")
 }
 
 func DeleteBookController(c echo.Context) error {
@@ -81,7 +81,7 @@ func DeleteBookController(c echo.Context) error {
 			return c.JSON(http.StatusOK, models.Response{Code: http.StatusOK, Message: "Success"})
 		}
 	}
-	return c.JSON(http.StatusNotFound, models.Response{Code: http.StatusNotFound, Message: "Book not found"})
+	return echo.NewHTTPError(http.StatusNotFound, "Book not found")
 }
 
 func RemoveIndex(s []models.Book, index int) []models.Book {

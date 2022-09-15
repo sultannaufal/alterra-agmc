@@ -1,8 +1,8 @@
 package database
 
 import (
-	"example.com/crud/config"
-	"example.com/crud/models"
+	"example.com/middleware/config"
+	"example.com/middleware/models"
 )
 
 func GetUsers() (interface{}, error) {
@@ -16,7 +16,7 @@ func GetUsers() (interface{}, error) {
 
 func GetUserByID(id string) (interface{}, error) {
 	user := models.User{}
-	if user := config.DB.First(&user).Where("id = ?", id); user.Error != nil {
+	if user := config.DB.Where("id = ?", id).First(&user); user.Error != nil {
 		return nil, user.Error
 	}
 	return user, nil
