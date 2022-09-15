@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "ef1a17b5-a685-40df-83d1-39ecb9bd479f",
+		"_postman_id": "360d6e35-e44e-4510-a3bb-9ae3fed88efd",
 		"name": "Golang Course",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17207226"
 	},
 	"item": [
 		{
-			"name": "DAY-2",
+			"name": "DAY-3",
 			"item": [
 				{
 					"name": "Users",
@@ -107,12 +107,12 @@
 									"formdata": [
 										{
 											"key": "name",
-											"value": "Naufal 2",
+											"value": "Naufal",
 											"type": "text"
 										},
 										{
 											"key": "email",
-											"value": "naufal2@go.com",
+											"value": "naufal@go.com",
 											"type": "text"
 										},
 										{
@@ -137,18 +137,28 @@
 							"response": []
 						},
 						{
-							"name": "Update",
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const response = JSON.parse(responseBody);\r",
+											"pm.environment.set(\"access_token\", `${response.access_token}`);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
-								"method": "PUT",
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "formdata",
 									"formdata": [
-										{
-											"key": "name",
-											"value": "Naufal 2",
-											"type": "text"
-										},
 										{
 											"key": "email",
 											"value": "naufal2@go.com",
@@ -162,14 +172,55 @@
 									]
 								},
 								"url": {
-									"raw": "{{url}}/api/v1/users",
+									"raw": "{{url}}/api/v1/users/token",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"api",
 										"v1",
-										"users"
+										"users",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Naufal 3",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "naufal3@go.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/v1/users/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"3"
 									]
 								}
 							},
@@ -341,6 +392,36 @@
 							"response": []
 						}
 					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
