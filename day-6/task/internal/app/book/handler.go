@@ -13,16 +13,15 @@ import (
 
 func Get(c echo.Context) error {
 	json_string, _ := database.Rdb.Get(context.Background(), "book").Result()
-	print(json_string)
 	var json_books = []byte(json_string)
 
-	var books []model.Book
+	books := make([]model.Book, 0)
 	err := json.Unmarshal(json_books, &books)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, Response{Code: http.StatusInternalServerError, Message: err.Error()})
 	}
 
-	return c.JSON(http.StatusOK, Response{Code: http.StatusOK, Message: "Success", Data: json_books})
+	return c.JSON(http.StatusOK, Response{Code: http.StatusOK, Message: "Success", Data: books})
 }
 
 // func GetByID(c echo.Context) error {
