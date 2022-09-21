@@ -1,1 +1,3 @@
-https://hub.docker.com/r/sultanaufal/clean-architecture
+#day 7
+
+https://hub.docker.com/repository/docker/sultanaufal/go
